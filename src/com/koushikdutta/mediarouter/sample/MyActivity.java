@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.media.MediaControlIntent;
 import android.support.v7.media.MediaRouteSelector;
 import android.support.v7.media.MediaRouter;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.io.File;
 
 public class MyActivity extends Activity {
     MediaRouter router;
@@ -69,7 +72,7 @@ public class MyActivity extends Activity {
                 continue;
             adapter.add(new RouteInfoWrapper(route));
         }
-
+        videoUri = Uri.parse(new File(Environment.getExternalStorageDirectory().toString()+"/DCIM/"+"Kgh.mp4").toString());
         // scan for new routes
         MediaRouteSelector selector = new MediaRouteSelector.Builder().addControlCategory("com.koushikdutta.cast.category.REMOTE_ALLCAST").build();
         router.addCallback(selector, callback, MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN);
